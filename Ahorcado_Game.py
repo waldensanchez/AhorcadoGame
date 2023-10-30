@@ -8,7 +8,7 @@ class AhorcadoGame:
         self.lives = lives
         self.guesses = []
         self.current_word = ['_'] * len(word)
-        self.hangman_stage = 6  # Initialize to the full hangman
+        self.hangman_stage = 6
 
     def display_state(self):
         hangman_images = [
@@ -37,7 +37,7 @@ class AhorcadoGame:
             elif guess in self.guesses:
                 print("YOU DUMB!")
                 self.lives -= 1
-                self.hangman_stage -= 1  # Update hangman image on repeat
+                self.hangman_stage -= 1 
                 self.display_state()
                 if self.lives == 0:
                     return None
@@ -54,7 +54,7 @@ class AhorcadoGame:
         else:
             self.lives -= 1
             print("NOT IN WORD!")
-            self.hangman_stage -= 1  # Update hangman image on wrong guess
+            self.hangman_stage -= 1
         self.guesses.append(guess)
 
     def game_over_message(self):
@@ -65,7 +65,11 @@ class AhorcadoGame:
             )
             print(freed_hangman)
         else:
-            print("YOU LOST!")
+            print(f"YOU LOST! The word was: {self.word}")
+            lost_hangman = (
+                "  ____\n |    |\n |    O\n |   /|\\\n |   / \\ \n |\n========="
+            )
+            print(lost_hangman)
 
     def play(self):
         while self.lives > 0 and not self.check_win():
